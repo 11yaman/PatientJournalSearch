@@ -8,22 +8,16 @@ import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.search.mapper.orm.session.SearchSession;
-import org.jboss.resteasy.reactive.RestQuery;
 
 import java.util.List;
 import java.util.Optional;
 
 @Path("/api/v1/patients")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class PatientSearchResource {
-
     @Inject
     PatientRepository patientRepository;
     @Inject
@@ -43,8 +37,8 @@ public class PatientSearchResource {
     @Path("/search")
     @GET
     @Transactional
-    public List<PatientDto> search(@RestQuery String q,
-                                @RestQuery Optional<Integer> size) {
+    public List<PatientDto> search(@QueryParam("q") String q,
+                                   @QueryParam("size") Optional<Integer> size) {
         List<Patient> result = searchSession.search(Patient.class)
                 .where(f -> {
                     if (q == null || q.isBlank()) {

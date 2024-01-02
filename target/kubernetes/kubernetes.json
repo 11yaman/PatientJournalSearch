@@ -3,7 +3,8 @@
   "kind" : "Service",
   "metadata" : {
     "annotations" : {
-      "app.quarkus.io/build-timestamp" : "2023-12-12 - 22:21:53 +0000"
+      "app.quarkus.io/commit-id" : "86edccaf8fbb7af11ebaa76083f8353f1d3e0d85",
+      "app.quarkus.io/build-timestamp" : "2023-12-13 - 08:29:36 +0000"
     },
     "labels" : {
       "app.kubernetes.io/name" : "journal-system-searching",
@@ -30,7 +31,8 @@
   "kind" : "Deployment",
   "metadata" : {
     "annotations" : {
-      "app.quarkus.io/build-timestamp" : "2023-12-12 - 22:21:53 +0000"
+      "app.quarkus.io/commit-id" : "86edccaf8fbb7af11ebaa76083f8353f1d3e0d85",
+      "app.quarkus.io/build-timestamp" : "2023-12-13 - 08:29:36 +0000"
     },
     "labels" : {
       "app.kubernetes.io/managed-by" : "quarkus",
@@ -50,7 +52,8 @@
     "template" : {
       "metadata" : {
         "annotations" : {
-          "app.quarkus.io/build-timestamp" : "2023-12-12 - 22:21:53 +0000"
+          "app.quarkus.io/commit-id" : "86edccaf8fbb7af11ebaa76083f8353f1d3e0d85",
+          "app.quarkus.io/build-timestamp" : "2023-12-13 - 08:29:36 +0000"
         },
         "labels" : {
           "app.kubernetes.io/managed-by" : "quarkus",
