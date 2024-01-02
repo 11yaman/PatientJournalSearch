@@ -9,10 +9,7 @@ import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.jboss.resteasy.reactive.RestQuery;
@@ -23,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Path("/api/v1/employees")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes
 public class EmployeeSearchResource {
 
     @Inject
@@ -45,8 +41,8 @@ public class EmployeeSearchResource {
     @Path("/search")
     @GET
     @Transactional
-    public List<UserDto> search(@RestQuery String q,
-                                @RestQuery Optional<Integer> size) {
+    public List<UserDto> search(@QueryParam("q") String q,
+                                @QueryParam("size") Optional<Integer> size) {
         List<Employee> result = searchSession.search(Employee.class)
                 .where(f -> {
                     if (q == null || q.isBlank()) {
