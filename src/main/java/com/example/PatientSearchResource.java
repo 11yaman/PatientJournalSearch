@@ -5,6 +5,8 @@ import com.example.mapping.StrategyMapper;
 import com.example.model.Patient;
 import com.example.repository.PatientRepository;
 import io.quarkus.runtime.StartupEvent;
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -38,6 +40,7 @@ public class PatientSearchResource {
     @Path("/search")
     @GET
     @Transactional
+    @RolesAllowed("EMPLOYEE")
     public List<PatientDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
         List<Patient> result = searchSession.search(Patient.class)

@@ -6,6 +6,7 @@ import com.example.model.Employee;
 import com.example.model.User;
 import com.example.repository.EmployeeRepository;
 import io.quarkus.runtime.StartupEvent;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -41,6 +42,7 @@ public class EmployeeSearchResource {
     @Path("/search")
     @GET
     @Transactional
+    @RolesAllowed("EMPLOYEE")
     public List<UserDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
         List<Employee> result = searchSession.search(Employee.class)

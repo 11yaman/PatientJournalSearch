@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    app.quarkus.io/commit-id: 86edccaf8fbb7af11ebaa76083f8353f1d3e0d85
-    app.quarkus.io/build-timestamp: 2023-12-13 - 08:40:14 +0000
+    app.quarkus.io/commit-id: 8b333fd4acb7e3e8b7868fdf044af551cbb9ffae
+    app.quarkus.io/build-timestamp: 2024-01-04 - 17:44:49 +0000
   labels:
     app.kubernetes.io/name: journal-system-searching
     app.kubernetes.io/version: 1.0.0-SNAPSHOT
@@ -25,8 +25,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.quarkus.io/commit-id: 86edccaf8fbb7af11ebaa76083f8353f1d3e0d85
-    app.quarkus.io/build-timestamp: 2023-12-13 - 08:40:14 +0000
+    app.quarkus.io/commit-id: 8b333fd4acb7e3e8b7868fdf044af551cbb9ffae
+    app.quarkus.io/build-timestamp: 2024-01-04 - 17:44:49 +0000
   labels:
     app.kubernetes.io/managed-by: quarkus
     app.kubernetes.io/name: journal-system-searching
@@ -41,8 +41,8 @@ spec:
   template:
     metadata:
       annotations:
-        app.quarkus.io/commit-id: 86edccaf8fbb7af11ebaa76083f8353f1d3e0d85
-        app.quarkus.io/build-timestamp: 2023-12-13 - 08:40:14 +0000
+        app.quarkus.io/commit-id: 8b333fd4acb7e3e8b7868fdf044af551cbb9ffae
+        app.quarkus.io/build-timestamp: 2024-01-04 - 17:44:49 +0000
       labels:
         app.kubernetes.io/managed-by: quarkus
         app.kubernetes.io/name: journal-system-searching
