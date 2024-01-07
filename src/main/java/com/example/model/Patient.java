@@ -34,8 +34,8 @@ public class Patient extends User{
         super(id, username, firstName, lastName, birthDate, Role.PATIENT);
     }
 
-    public Patient(String username, String password, String firstName, String lastName, LocalDate birthDate) {
-        super(username, password, firstName, lastName, birthDate, Role.PATIENT);
+    public Patient(String username, String firstName, String lastName, LocalDate birthDate) {
+        super(username, firstName, lastName, birthDate, Role.PATIENT);
     }
 
     public List<Message> getMessages() {
