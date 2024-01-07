@@ -6,12 +6,14 @@ import com.example.model.Employee;
 import com.example.model.User;
 import com.example.repository.EmployeeRepository;
 import io.quarkus.runtime.StartupEvent;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.hibernate.search.mapper.orm.session.SearchSession;
+import org.jboss.resteasy.reactive.RestQuery;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +42,7 @@ public class EmployeeSearchResource {
     @Path("/search")
     @GET
     @Transactional
+    @RolesAllowed("EMPLOYEE")
     public List<UserDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
         List<Employee> result = searchSession.search(Employee.class)

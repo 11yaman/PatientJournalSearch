@@ -27,7 +27,6 @@ public abstract class User {
     @FullTextField(analyzer = "name")
     @Column(unique = true)
     private String username;
-    private String password;
 
     private LocalDate birthDate;
     private Role role;
@@ -52,13 +51,11 @@ public abstract class User {
 
     public User(
             String username,
-            String password,
             String firstName,
             String lastName,
             LocalDate birthDate,
             Role role) {
         this.username = username;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
