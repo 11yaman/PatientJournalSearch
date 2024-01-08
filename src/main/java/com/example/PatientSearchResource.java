@@ -40,7 +40,7 @@ public class PatientSearchResource {
     @Path("/search")
     @GET
     @Transactional
-    @RolesAllowed("EMPLOYEE")
+    //@RolesAllowed("EMPLOYEE")
     public List<PatientDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
         List<Patient> result = searchSession.search(Patient.class)
