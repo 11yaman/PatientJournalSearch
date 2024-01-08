@@ -3,8 +3,8 @@
   "kind" : "Service",
   "metadata" : {
     "annotations" : {
-      "app.quarkus.io/commit-id" : "cf91ca7e56991f583309b6e405507322a1b1b97f",
-      "app.quarkus.io/build-timestamp" : "2024-01-08 - 02:25:09 +0000"
+      "app.quarkus.io/commit-id" : "33bf8c9cc0a7e7725d3d62a558e903be7494dab5",
+      "app.quarkus.io/build-timestamp" : "2024-01-08 - 02:44:30 +0000"
     },
     "labels" : {
       "app.kubernetes.io/name" : "journal-system-searching",
@@ -31,13 +31,13 @@
   "kind" : "Deployment",
   "metadata" : {
     "annotations" : {
-      "app.quarkus.io/commit-id" : "cf91ca7e56991f583309b6e405507322a1b1b97f",
-      "app.quarkus.io/build-timestamp" : "2024-01-08 - 02:25:09 +0000"
+      "app.quarkus.io/commit-id" : "33bf8c9cc0a7e7725d3d62a558e903be7494dab5",
+      "app.quarkus.io/build-timestamp" : "2024-01-08 - 02:44:30 +0000"
     },
     "labels" : {
       "app.kubernetes.io/managed-by" : "quarkus",
-      "app.kubernetes.io/name" : "journal-system-searching",
-      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.kubernetes.io/name" : "journal-system-searching"
     },
     "name" : "journal-system-searching"
   },
@@ -45,20 +45,20 @@
     "replicas" : 1,
     "selector" : {
       "matchLabels" : {
-        "app.kubernetes.io/name" : "journal-system-searching",
-        "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+        "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+        "app.kubernetes.io/name" : "journal-system-searching"
       }
     },
     "template" : {
       "metadata" : {
         "annotations" : {
-          "app.quarkus.io/commit-id" : "cf91ca7e56991f583309b6e405507322a1b1b97f",
-          "app.quarkus.io/build-timestamp" : "2024-01-08 - 02:25:09 +0000"
+          "app.quarkus.io/commit-id" : "33bf8c9cc0a7e7725d3d62a558e903be7494dab5",
+          "app.quarkus.io/build-timestamp" : "2024-01-08 - 02:44:30 +0000"
         },
         "labels" : {
           "app.kubernetes.io/managed-by" : "quarkus",
-          "app.kubernetes.io/name" : "journal-system-searching",
-          "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+          "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+          "app.kubernetes.io/name" : "journal-system-searching"
         }
       },
       "spec" : {
