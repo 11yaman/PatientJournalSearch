@@ -42,7 +42,7 @@ public class EmployeeSearchResource {
     @Path("/search")
     @GET
     @Transactional
-    //@RolesAllowed("EMPLOYEE")
+    @RolesAllowed("EMPLOYEE")
     public List<UserDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
         List<Employee> result = searchSession.search(Employee.class)
