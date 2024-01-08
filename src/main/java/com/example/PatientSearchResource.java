@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.dto.PatientDto;
 import com.example.mapping.StrategyMapper;
+import com.example.model.Employee;
 import com.example.model.Patient;
 import com.example.repository.PatientRepository;
 import io.quarkus.runtime.StartupEvent;
@@ -12,9 +13,10 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.jboss.resteasy.reactive.RestQuery;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,17 +27,6 @@ public class PatientSearchResource {
     PatientRepository patientRepository;
     @Inject
     StrategyMapper<Patient, PatientDto> patientMapper;
-    @Inject
-    SearchSession searchSession;
-
-    @Transactional
-    void onStart(@Observes StartupEvent ev) throws InterruptedException {
-        if (patientRepository.count() > 0) {
-            System.out.println("FLAG");
-            searchSession.massIndexer()
-                    .startAndWait();
-        }
-    }
 
     @Path("/search")
     @GET
@@ -43,18 +34,16 @@ public class PatientSearchResource {
     @RolesAllowed("EMPLOYEE")
     public List<PatientDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
-        List<Patient> result = searchSession.search(Patient.class)
-                .where(f -> {
-                    if (q == null || q.isBlank()) {
-                        return f.matchAll();
-                    } else {
-                        return f.simpleQueryString()
-                                .fields("firstName", "lastName",
-                                        "conditions.type", "conditions.description")
-                                .matching(q);
-                    }
-                }).sort(f -> f.field("firstName_sort").then().field("lastName_sort"))
-                .fetchHits(size.orElse(20));
-        return patientMapper.mapAll(result);
+        if (q == null || q.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        String searchQuery = "%" + q.trim() + "%";
+        List<Patient> patients = patientRepository.find("LOWER(firstName) LIKE LOWER(?1) OR LOWER(lastName) LIKE LOWER(?1)",
+                        searchQuery)
+                .page(0, size.orElse(10))
+                .list();
+
+        return patientMapper.mapAll(new ArrayList<>(patients));
     }
 }

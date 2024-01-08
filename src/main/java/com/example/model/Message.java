@@ -1,11 +1,6 @@
 package com.example.model;
 
 import jakarta.persistence.*;
-import org.hibernate.search.engine.backend.types.Sortable;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "message", schema = "JournalSystemDB")
-@Indexed
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

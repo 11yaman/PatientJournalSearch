@@ -21,7 +21,6 @@ com\example\model\Employee.class
 com\example\dto\EncounterDto.class
 com\example\repository\EmployeeRepository.class
 com\example\dto\ReplyDto.class
-com\example\config\AnalysisConfigurer.class
 com\example\mapping\EncounterMapper.class
 com\example\model\User$Role.class
 com\example\EmployeeSearchResource.class

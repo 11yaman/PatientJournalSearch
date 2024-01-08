@@ -1,11 +1,6 @@
 package com.example.model;
 
 import jakarta.persistence.*;
-import org.hibernate.search.engine.backend.types.Sortable;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.jboss.logging.annotations.Field;
 
 import java.time.LocalDate;
@@ -13,18 +8,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "user", schema = "JournalSystemDB")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Indexed
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @FullTextField(analyzer = "name")
-    @KeywordField(name = "firstName_sort", sortable = Sortable.YES, normalizer = "sort")
     private String firstName;
-    @FullTextField(analyzer = "name")
-    @KeywordField(name = "lastName_sort", sortable = Sortable.YES, normalizer = "sort")
     private String lastName;
-    @FullTextField(analyzer = "name")
     @Column(unique = true)
     private String username;
 

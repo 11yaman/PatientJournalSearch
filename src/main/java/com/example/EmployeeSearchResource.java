@@ -12,9 +12,10 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.jboss.resteasy.reactive.RestQuery;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,17 +28,6 @@ public class EmployeeSearchResource {
     EmployeeRepository employeeRepository;
     @Inject
     StrategyMapper<User, UserDto> employeeMapper;
-    @Inject
-    SearchSession searchSession;
-
-    @Transactional
-    void onStart(@Observes StartupEvent ev) throws InterruptedException {
-        if (employeeRepository.count() > 0) {
-            System.out.println("FLAG");
-            searchSession.massIndexer()
-                    .startAndWait();
-        }
-    }
 
     @Path("/search")
     @GET
@@ -45,20 +35,16 @@ public class EmployeeSearchResource {
     @RolesAllowed("EMPLOYEE")
     public List<UserDto> search(@QueryParam("q") String q,
                                 @QueryParam("size") Optional<Integer> size) {
-        List<Employee> result = searchSession.search(Employee.class)
-                .where(f -> {
-                    if (q == null || q.isBlank()) {
-                        return f.matchAll();
-                    } else {
-                        return f.simpleQueryString()
-                                .fields("firstName", "lastName")
-                                .matching(q);
-                    }
-                }).sort(f -> f.field("firstName_sort").then().field("lastName_sort"))
-                .fetchHits(size.orElse(20));
+        if (q == null || q.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
 
-        return result.stream()
-                .map(employee -> employeeMapper.map(employee))
-                .collect(Collectors.toList());
+        String searchQuery = "%" + q.trim() + "%";
+        List<Employee> employees = employeeRepository.find("LOWER(firstName) LIKE LOWER(?1) OR LOWER(lastName) LIKE LOWER(?1)",
+                        searchQuery)
+                .page(0, size.orElse(10))
+                .list();
+
+        return employeeMapper.mapAll(new ArrayList<>(employees));
     }
 }

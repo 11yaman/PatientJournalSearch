@@ -1,8 +1,6 @@
 package com.example.model;
 
 import jakarta.persistence.*;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "patient", schema = "JournalSystemDB")
-@Indexed
 public class Patient extends User{
 
     @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
@@ -23,7 +20,6 @@ public class Patient extends User{
     private List<Encounter> encounters;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
-    @IndexedEmbedded
     @Column(name = "conditionEntities")
     private List<Condition> conditions;
 

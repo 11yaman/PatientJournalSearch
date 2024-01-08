@@ -2,12 +2,10 @@ package com.example.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import java.time.LocalDate;
 
 @Entity
-@Indexed
 @Table(name = "employee", schema = "JournalSystemDB")
 public class Employee extends User{
     private Position position;
